@@ -231,7 +231,7 @@ export default {
           const loC = item.match(/\[(.*)\]!/)[1]
           this.navigation.forEach(nav => {
             if (nav.href) {
-              const href = nav.href.match(/^(.*)\.html$/)[1]
+              const href = nav.href.match(/^(.*)\.xhtml$/)[1]
               if (href === loC) {
                 nav.pagelist.push(item)
               }
@@ -259,12 +259,10 @@ export default {
     const fileName = books[1]
     getLocalForage(fileName, (err, blob) => {
       if (!err && blob) {
-        console.log('找到离线缓存电子书')
         this.setFileName(books.join('/')).then(() => {
           this.initEpub(blob)
         })
       } else {
-        console.log('在线获取电子书')
         this.setFileName(books.join('/')).then(() => {
           const url = process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
           this.initEpub(url)

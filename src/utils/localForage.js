@@ -34,7 +34,6 @@ export function lengthLocalForage (cb) {
   localForage.length().then(
     numberOfKeys => {
       if (cb) cb(numberOfKeys)
-      console.log(numberOfKeys)
     }).catch(function (err) {
     console.log(err)
   })

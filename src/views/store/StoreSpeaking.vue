@@ -201,7 +201,6 @@ export default {
   methods: {
     createVoice (text) {
       const xmlhttp = new XMLHttpRequest()
-      console.log(process.env.VUE_APP_VOICE_URL, text, this.lang.toLowerCase())
       xmlhttp.open('GET', `${process.env.VUE_APP_VOICE_URL}/voice?text=${text}&lang=${this.lang.toLowerCase()}`, false)
       xmlhttp.send()
       const xmlDoc = xmlhttp.responseText
@@ -275,7 +274,6 @@ export default {
           this.currentSectionIndex = currentPage.start.displayed.page
           this.currentSectionTotal = currentPage.start.displayed.total
           const cfi = `epubcfi(${cfibase}!,${cfistart},${cfiend})`
-          // console.log(currentPage, cfi, cfibase, cfistart, cfiend)
           this.book.getRange(cfi).then(range => {
             let text = range.toLocaleString()
             text = text.replace(/\s(2,)/g, '')
@@ -296,7 +294,6 @@ export default {
       this.playStatus = 0
     },
     play () {
-      console.log(this.paragraph)
       this.createVoice(this.paragraph)
     },
     continuePlay () {
