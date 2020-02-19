@@ -226,7 +226,7 @@ export default {
           font-size: px2rem(12);
           color: #666;
 
-          &.focus {
+          &:focus {
             outline: none;
           }
 
