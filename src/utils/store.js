@@ -1,4 +1,23 @@
-import { getLocalStorage } from './localStorage'
+import { getLocalStorage, getBookShelf, saveBookShelf } from './localStorage'
+
+export function addToShelf (book) {
+  let shelfList = getBookShelf()
+  shelfList = removeAddFromShelf(shelfList)
+  book.type = 1
+  shelfList.push(book)
+  shelfList = computeId(shelfList)
+  shelfList = appendAddToShelf(shelfList)
+  saveBookShelf(shelfList)
+}
+
+export function removeFromBookShelf (book) {
+  return getBookShelf().filter(item => {
+    if (item.itemList) {
+      item.itemList = removeAddFromShelf(item.itemList)
+    }
+    return item.fileName !== book.fileName
+  })
+}
 
 export function flatBookList (bookList) {
   if (bookList) {
@@ -33,12 +52,12 @@ export function findBook (fileName) {
   return flatBookList(bookList).find(item => item.fileName === fileName)
 }
 
-export function compytedId (list) {
+export function computeId (list) {
   return list.map((book, index) => {
     if (book.type !== 3) {
       book.id = index + 1
       if (book.itemList) {
-        book.itemList = compytedId(book.itemList)
+        book.itemList = computeId(book.itemList)
       }
     }
     return book

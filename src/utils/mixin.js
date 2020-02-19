@@ -1,7 +1,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { themeList, addCss, removeAllCss, getReadTimeByMinute } from './book'
 import { getBookmark, saveLocation, getBookShelf, saveBookShelf } from './localStorage'
-import { gotoBookDetail, appendAddToShelf, compytedId, removeAddFromShelf } from './store'
+import { gotoBookDetail, appendAddToShelf, computeId, removeAddFromShelf } from './store'
 import { shelf } from '../api/store'
 
 export const storeShelfMixin = {
@@ -57,7 +57,7 @@ export const storeShelfMixin = {
         }
         return book
       })).then(() => {
-        const list = compytedId(appendAddToShelf([].concat(removeAddFromShelf(this.shelfList), ...this.shelfSelected)))
+        const list = computeId(appendAddToShelf([].concat(removeAddFromShelf(this.shelfList), ...this.shelfSelected)))
         this.setShelfList(list).then(() => {
           this.simpleToast(this.$t('shelf.moveBookOutSuccess'))
           if (f) f()
