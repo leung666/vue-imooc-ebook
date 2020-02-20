@@ -258,11 +258,15 @@ class Experience {
       }
     }
     this.websocket.onerror = (e) => {
-      console.log(e)
-      console.log(e.data)
+      // console.log(e)
+      // console.log(e.data)
+      if (e) {
+      }
     }
     this.websocket.onclose = (e) => {
-      console.log(e)
+      // console.log(e)
+      if (e) {
+      }
     }
   }
 
@@ -305,7 +309,9 @@ class Experience {
     try {
       source && source.stop()
     } catch (e) {
-      console.log(e)
+      // console.log(e)
+      if (e) {
+      }
     }
   }
 
@@ -491,13 +497,13 @@ export default {
   methods: {
     // 在线语音合成
     createVoice (text) {
-      console.log('在线语音合成', text)
+      // console.log('在线语音合成', text)
       if (text !== experience.text) {
         experience.setConfig({
           text
         })
       }
-      console.log(experience)
+      // console.log(experience)
       if (experience.playState === 'play') {
         experience.audioPause()
         this.resetPlay()
